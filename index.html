@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+	<link data-require="bootstrap-css@3.2.0" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+	/>
+	<script data-require="angular.js@1.2.25" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular.js"></script>
+	<link rel="stylesheet" href="style.css" />
+	<script src="script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.min.js"></script>
+</head>
+
+<body ng-controller="mainCtrl" class="box">
+	<div class="rrow header">
+		<h1>smart-table with flexbox</h1>
+		<p>Demo showing a smart-table table with sorting, filtering, paging and the table contents container
+			is the element that absorbs viewport size changes.
+		</p>
+	</div>
+	<table st-table="displayed" class="table table-striped rrow content">
+		<thead>
+			<tr>
+				<th st-ratio="20" st-sort="firstName">first name</th>
+				<th st-ratio="20" st-sort="lastName">last name</th>
+				<th st-ratio="10" st-sort="age">age</th>
+				<th st-ratio="30" st-sort="email">email</th>
+				<th st-ratio="20" st-sort="balance">balance</th>
+			</tr>
+			<tr>
+				<th st-ratio="20"><input st-search="firstName" placeholder="search for firstname" class="input-sm form-control" type="search" /></th>
+				<th st-ratio="20"><input st-search="lastName" placeholder="search for lastname" class="input-sm form-control" type="search" /></th>
+				<th st-ratio="10"><input st-search="age" placeholder="search for age" class="input-sm form-control" type="search" /></th>
+				<th st-ratio="30"><input st-search="email" placeholder="search for email" class="input-sm form-control" type="search" /></th>
+				<th st-ratio="20"><input st-search="balance" placeholder="search for balance" class="input-sm form-control" type="search" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in displayed">
+				<td st-ratio="20">{{row.firstName}}</td>
+				<td st-ratio="20">{{row.lastName | uppercase}}</td>
+				<td st-ratio="10">{{row.age}}</td>
+				<td st-ratio="30">{{row.email}}</td>
+				<td st-ratio="20">{{row.balance | currency}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>
+					<div class="form-inline">
+						<div class="form-group">
+							<label for="globalsearch">Global search</label>
+							<input st-search placeholder="global search" class="input-sm form-control" type="search" id="globalsearch" />
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" class="text-center">
+					<div st-items-by-page="20" st-pagination=""></div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</body>
+
+</html>
