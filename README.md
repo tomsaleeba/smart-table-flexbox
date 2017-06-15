@@ -7,7 +7,7 @@ I needed a table that:
  - still supports exporting to CSV. As a bonus, the export honours the filters. You'll probably want to turn off paging to get all available rows.
 
 This uses:
- - angular-smart-table: https://lorenzofox3.github.io/smart-table-website/#top
+ - angular-smart-table: https://lorenzofox3.github.io/smart-table-website
  - ng-table-to-csv: https://github.com/kollavarsham/ng-table-to-csv
  - the SO answer: https://stackoverflow.com/a/24979148/1410035
 
@@ -15,7 +15,6 @@ This uses:
 
         git clone <this repo>
         cd <this repo>
-        bower install
         ./webserver.sh
         # open localhost:8080
 
