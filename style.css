@@ -76,3 +76,11 @@ tfoot td {
   width: 100%;
   display: inline-block;
 }
+
+.st-sort-ascent:before {
+  content: '\25B2';
+}
+
+.st-sort-descent:before {
+  content: '\25BC';
+}
