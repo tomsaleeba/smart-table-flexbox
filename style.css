@@ -8,11 +8,7 @@ html, body {
   flex-flow: column;
   height: 100%;
 }
-
-/*.box .rrow {
-  border: 1px dotted grey;
-}*/
-
+/* we use rrow so we don't conflict with bootstrap's row class */
 .box .rrow.header {
   flex: 0 1 auto;
 }

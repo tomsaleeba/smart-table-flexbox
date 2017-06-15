@@ -4,20 +4,25 @@
 <head>
 	<link data-require="bootstrap-css@3.2.0" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
 	/>
-	<script data-require="angular.js@1.2.25" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular.js"></script>
 	<link rel="stylesheet" href="style.css" />
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+	<script src="bower_components/ng-table-to-csv/dist/ng-table-to-csv.min.js"></script>
 	<script src="script.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.min.js"></script>
 </head>
 
 <body ng-controller="mainCtrl" class="box">
 	<div class="rrow header">
-		<h1>smart-table with flexbox</h1>
-		<p>Demo showing a smart-table table with sorting, filtering, paging and the table contents container
-			is the element that absorbs viewport size changes.
+		<h1>smart-table with flexbox and CSV export</h1>
+		<p>Demo showing a smart-table table with sorting, filtering, paging and the table contents container is the element that absorbs
+			viewport size changes. You can also export the currently display table as a CSV file. You'll probably want to disable paging
+			before doing the export so you get all the rows.
+			<a class="btn" title="Export Table" ng-click="csv.generate()" ng-href="{{ csv.link() }}" download="myTable.csv">
+				<i class="glyphicon glyphicon-new-window"></i> &#160;Export current view as CSV
+			</a>
 		</p>
 	</div>
-	<table st-table="displayed" class="table table-striped rrow content">
+	<table st-table="displayed" class="table table-striped rrow content" export-csv="csv" export-csv-ignore="export-ignore">
 		<thead>
 			<tr>
 				<th st-ratio="20" st-sort="firstName">first name</th>
@@ -26,7 +31,7 @@
 				<th st-ratio="30" st-sort="email">email</th>
 				<th st-ratio="20" st-sort="balance">balance</th>
 			</tr>
-			<tr>
+			<tr class="export-ignore">
 				<th st-ratio="20"><input st-search="firstName" placeholder="search for firstname" class="input-sm form-control" type="search" /></th>
 				<th st-ratio="20"><input st-search="lastName" placeholder="search for lastname" class="input-sm form-control" type="search" /></th>
 				<th st-ratio="10"><input st-search="age" placeholder="search for age" class="input-sm form-control" type="search" /></th>
@@ -44,7 +49,7 @@
 			</tr>
 		</tbody>
 		<tfoot>
-			<tr>
+			<tr class="export-ignore">
 				<td>
 					<div class="form-inline">
 						<div class="form-group">
@@ -54,9 +59,11 @@
 					</div>
 				</td>
 			</tr>
-			<tr>
+			<tr class="export-ignore" ng-init="itemsPerPage = 10">
 				<td colspan="5" class="text-center">
-					<div st-items-by-page="20" st-pagination=""></div>
+					<button ng-click="pagingOff = true; itemsPerPage = 99999">paging off</button>
+					<button ng-click="pagingOff = false; itemsPerPage = 10">paging on</button>
+					<div ng-hide="pagingOff" st-items-by-page="itemsPerPage" st-pagination=""></div>
 				</td>
 			</tr>
 		</tfoot>
